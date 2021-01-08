@@ -13,7 +13,7 @@ double dist(double *r, double *a)
    double d = 0.0;
    for(int i = 0; i < nobj; i++)
      d += max(a[i]-r[i], 0.0)*max(a[i]-r[i], 0.0);
-   return d;
+   return sqrt(d);
 }
 double IGD(double *reference, int size_r, double  *point, int size_p)
 {
@@ -22,7 +22,7 @@ double IGD(double *reference, int size_r, double  *point, int size_p)
    {
       double mind = DBL_MAX;
       for(int  j = 0; j < size_p; j++)
-	 mind = min(mind, dist(reference + i*nobj, point + j*nobj));
+	 mind = min(mind, pow(dist(reference + i*nobj, point + j*nobj), p) );
       totaldist +=mind;
    } 
    return pow((totaldist/size_r), 1.0/p);
